@@ -1,0 +1,68 @@
+\documentclass[12pt]{article}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{\baselineskip}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{breqn}
+\newcommand{\tab}{\hspace*{2em}}
+\begin{document}
+CSCI 3104 Spring 2014 \hfill Problem Set 1\\
+Andrew Howe (01/16) 
+
+\hrulefill
+
+1. Determine whether the following claims are true or false. \\
+\tab a)  \begin{math} n+3=O(n^3) \end{math} \\
+\tab\tab True \begin{dmath}\lim_{n to \infty}\frac{n+3}{n^3}=0\end{dmath} 
+\tab b)  \begin{math}3^{2n}=O(3^n)\end{math} \\
+\tab\tab False   \begin{dmath}\lim_{n to \infty}\frac{3^{2n}}{3^n}=\infty\end{dmath}
+\tab c)  \begin{math}n^n=o(n!)\end{math} \\
+\tab\tab False  \begin{dmath}\lim_{n to \infty} \frac{n^n}{n!}=\infty\end{dmath}
+\tab d)  \begin{math}\frac{1}{3n} = o(1) \end{math} \\
+\tab\tab True  \begin{dmath}\lim_{n to \infty}\frac{\frac{1}{3n}}{1}=0\end{dmath}
+\tab e)  \begin{math}ln^3n=\theta (lg^3n) \end{math}\\
+\tab\tab True \begin{dmath}\lim_{n to \infty} \frac{ln^3n}{lg^3n}	=	lg^3(10) \end{dmath} 
+\newpage
+2. Simplify the following expressions. \\
+\tab a) 	\begin{math}\frac{d}{dt}(3t^4+\frac{1}{3}t^3-7) \end{math}\\
+\begin{dmath}12t^3+3t^2  \end{dmath}
+\tab b)		\begin{math}\sum_{i=0}^k 2^i		\end{math}\\
+\begin{dmath*}\sum_{i=0}^{k-1} 2^i=\frac{1-2^i}{1-2} = 2^i-1\tab \text{$i$ $>$ 0}\end{dmath*}
+\begin{dmath} \sum_{i=0}^k 2^i=2^{i+1}-1 \tab \text{$i$ $>=$ 0}\end{dmath}
+\tab c)		\begin{math}\theta(\sum_{k=1}^n \frac{1}{k}) \end{math}\\
+\tab\tab I use the integral test to compare the equations
+\begin{dmath*}\sum_{k=1}^n \frac{1}{k} > \int_{1}^n 1/n = ln(n) \Big|_1^n = ln(n) \end{dmath*}
+We can see this integral does not converge and implies the series in divergent
+\begin{dmath}\theta(\infty)\end{dmath}
+\newpage
+3. Describe an O(n) time algorithm that takes input T and returns an array containing the same values in ascending order.\\
+	\tab Merge sort is an O(n) sorting algorithm it insures that the correct result is always \tab given by first spliting the list down to each element then comparing two elements at a \tab time creating  new sorted lists of length two it then continues to compare the elements \tab  of each list next to each other creating half the number of correctly sorted lists until \tab only one correctly sorted list remains\\\\
+4. Should Acme develop a faster algorithm or stick with the current algorithm?\\
+\tab a) Let \begin{math}n=41, f(n)=1.99^n, g(n)=n^3\end{math} and $t=17$ days\\
+\tab\tab If the integral of f(n) is less than the [integral of g(n)] + t(in microseconds) then \tab\tab Acme should stick with the current algorithm
+\begin{dmath*}\int_{0}^{41} 1.99^n=\frac{1.99^n}{ln(1.99)} \big|_0^{41}=1.99^{40}-1=8.99752x10^{11}\end{dmath*}
+\begin{dmath*}
+\int_0^{41} n^3\mathrm{d}n					
+	= \frac{n^4}{4} \Big|_0^{41}
+	=	\frac{41^4}{4}-0
+	=	706440 + 1.4688x10^{12} \approx 1.4688x10^{12}
+\end{dmath*}
+\begin{dmath}8.99752x10^{11} < 1.4688x10^{12} \end{dmath}
+\tab\tab They should continue to use the current algorithm\newpage
+\tab b) Let \begin{math}n=10^6, f(n)=n^{2.00}, g(n)=n^{1.99}\end{math} and $t=2$ days\\
+\begin{dmath*}\int_{0}^{10^6} n^{2.00} = \frac{n^3}{3} \Big|_0^{10^6} = 3.33x10^{17} \end{dmath*}
+\begin{dmath*}\int_{0}^{10^6} n^{1.99} = \frac{n^{2.99}}{2.99} \Big|_0^{10^6} =2.912x10^{17} + 1.728x10^{11} \approx 2.912x10^{17}\end{dmath*}
+\begin{dmath} 3.33x10^{17} > 2.912x10^{17}\end{dmath}
+\tab\tab They should develop the new algorithm\\\\
+5. Using the mathematical definition of Big-O, answer the following.\\
+\tab a) Is $2^{nk}$ = $O(2^n)$ for $k>1$?
+\begin{dmath} \lim_{n to \infty}\frac{2^{nk}}{2^n}=\lim_{n to \infty}2^k = \infty \end{dmath}
+\tab\tab Since the limit diverges to infinity we can conclude that $2^{nk}$ is not $O(2^n)$\newpage
+\tab b) Is $2^{n+k}$ = $O(2^n)$, for $k=O(1)$?\\
+\begin{dmath}\lim_{n to \infty}\frac{2^{n+k}}{2^n} = \lim_{n to \infty}2^k	\end{dmath}
+\tab\tab Since k has a constant run time we can conclude that $2^{n+k}$ is not $O(2^n)$ when the \tab \tab run time of k is not 0\\\\
+6. Is an array that is in sorted order also a min-heap?\\
+\tab Yes given that an algorithm exists to correctly index into the sorted array given the \tab position in the min-heap.
+\end{document}
