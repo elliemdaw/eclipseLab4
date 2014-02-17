@@ -71,7 +71,7 @@ public class Node {
 		
 	
 	
-	public Node addValue(Node list,String key,int prev)
+	private Node addValue(Node list,String key,int prev)
 	{
 		if(list!=null)
 		{
@@ -90,6 +90,10 @@ public class Node {
 			}
 			
 		}
+		if(list==null)
+		{
+			return new Node(key,1,null);
+		}
 		return list;
 	}
 	
@@ -102,6 +106,30 @@ public class Node {
 			System.out.println("Data: "+iterator.getData()+" Value: "+iterator.getValue());
 			iterator=iterator.getNext();
 		}
+	}
+	public Node increment(Node list,String key)
+	{
+		list=list.addValue(list, key, list.getValue());
+		list=list.sortList(list);
+		return list;
+	}
+	public Node sortList(Node list)
+	{
+		Node iterator=list;
+		int prev=iterator.getValue();
+		while(iterator!=null)
+		{
+			if(iterator.getValue()>prev)
+			{
+				list=list.remove(list, iterator.getData());
+				iterator.Next=null;
+				list=list.insert(list,iterator);
+				return list;
+			}
+			prev=iterator.getValue();
+			iterator=iterator.getNext();
+		}
+		return list;
 	}
 	
 	//Getters

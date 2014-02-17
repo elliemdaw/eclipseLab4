@@ -54,13 +54,18 @@ public class Huffman {
 		n.printList();
 		
 		//Test adding value (no Swap)
-		n=n.addValue(n, "d", n.getValue());
+		n=n.increment(n, "d");
 		System.out.println("----------------------------------");
 		n.printList();
 		
 		//Test adding value (Swap)
-		n=n.addValue(n, "c", n.getValue());
-		n=n.addValue(n, "c", n.getValue());
+		n=n.increment(n, "c");
+		n=n.increment(n, "c");
+		System.out.println("----------------------------------");
+		n.printList();
+		
+		//Test adding value (no Swap)
+		n=n.increment(n, "a");
 		System.out.println("----------------------------------");
 		n.printList();
 		
