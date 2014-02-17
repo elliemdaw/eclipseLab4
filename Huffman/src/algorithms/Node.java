@@ -24,7 +24,7 @@ public class Node {
 	}
 	
 	
-
+	//Key component in reordering the list
 	public Node insert(Node list,Node i)
 	{
 		//Check if element should be added to the front
@@ -47,16 +47,52 @@ public class Node {
 		
 	}
 	
-	public Node addValue(Node list,String data)
+	//Create remove item so we can chain add and remove to iterate values and easily break ties
+	public Node remove(Node list, String key)
 	{
-		Node iterator=list;
-		while(iterator.Data!=data)
+		if(list!=null)
 		{
 			
-		}
 		
+			if(list.getData()==key)
+			{
+				return list.Next;
+			}
+			else
+			{
+			list.Next=remove(list.Next,key);
+			
+			}
+			
+		}
 		return list;
 	}
+		
+		
+	
+	
+	public Node addValue(Node list,String key,int prev)
+	{
+		if(list!=null)
+		{
+			
+		
+			if(list.getData()==key)
+			{
+				//increase count of frequency of character
+				list.Value++;
+				return list;
+			}
+			else
+			{
+			list.Next=addValue(list.Next,key,list.Value);
+			
+			}
+			
+		}
+		return list;
+	}
+	
 	public void printList()
 	{
 		System.out.println("Data: "+Data+" Value: "+Value);
