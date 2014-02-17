@@ -54,7 +54,7 @@ public class Node {
 		{
 			
 		
-			if(list.getData()==key)
+			if(list.getData().equalsIgnoreCase(key))
 			{
 				return list.Next;
 			}
@@ -77,7 +77,7 @@ public class Node {
 		{
 			
 		
-			if(list.getData()==key)
+			if(list.getData().equalsIgnoreCase(key))
 			{
 				//increase count of frequency of character
 				list.Value++;
@@ -99,13 +99,25 @@ public class Node {
 	
 	public void printList()
 	{
-		System.out.println("Data: "+Data+" Value: "+Value);
+		System.out.println("CodeBook");
+		System.out.println("--------------------------------------------");
+		System.out.println("Data: "+Data+" Value: "+Value+" Code: "+"1");
+		int numBits=Value*1;
+		int numASCII=Value*8;
 		Node iterator=Next;
+		String prefix="0";
 		while(iterator!=null)
 		{
-			System.out.println("Data: "+iterator.getData()+" Value: "+iterator.getValue());
+			System.out.println("Data: "+iterator.getData()+" Value: "+iterator.getValue()+" Code: "+prefix+"1");
+			numBits=numBits+((prefix.length()+1)*iterator.getValue());
+			numASCII=numASCII+(8*iterator.getValue());
 			iterator=iterator.getNext();
+			prefix=prefix+"0";
 		}
+		System.out.println("--------------------------------------------");
+		System.out.println("Total number of bits required to encode: "+numBits);
+		System.out.println("Total number of bits to encode in ASCII: "+numASCII);
+		System.out.println("This is a compressed size is "+((double)numBits)/numASCII*100+"% of the original");
 	}
 	public Node increment(Node list,String key)
 	{
